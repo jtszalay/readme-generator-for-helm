@@ -118,6 +118,7 @@ Currently supported modifiers:
 - `[array]` Indicates that the value of the parameter must be set to `[]`.
 - `[object]` Indicates that the value of the parameter must be set to `{}`.
 - `[string]` Indicates that the value of the parameter must be set to `""`.
+- `[number]` Indicates that the value of the parameter must be set to `0`.
 - `[nullable]` Indicates that the parameter value can be set to `null`.
 
 The modifiers are also customizable via the [configuration file](#configuration-file).
