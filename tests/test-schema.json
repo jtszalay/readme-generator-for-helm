@@ -56,16 +56,21 @@
                 "registry": {
                     "type": "string",
                     "description": "Kubewatch image registry",
-                    "default": "REGISTRY_NAME"
+                    "default": "docker.io"
                 },
                 "repository": {
                     "type": "string",
                     "description": "Kubewatch image name",
-                    "default": "REPOSITORY_NAME/kubewatch"
+                    "default": "bitnami/kubewatch"
+                },
+                "tag": {
+                    "type": "string",
+                    "description": "Kubewatch image tag",
+                    "default": "0.1.0-debian-10-r162"
                 },
                 "pullPolicy": {
                     "type": "string",
-                    "description": "Kubewatch image pull policy",
+                    "description": "Kubewatch image tag",
                     "default": "IfNotPresent"
                 },
                 "pullSecrets": {
@@ -172,6 +177,21 @@
                 "webhookurl": {
                     "type": "string",
                     "description": "Microsoft Teams webhook URL",
+                    "default": ""
+                }
+            }
+        },
+        "webhook": {
+            "type": "object",
+            "properties": {
+                "enabled": {
+                    "type": "boolean",
+                    "description": "",
+                    "default": false
+                },
+                "url": {
+                    "type": "string",
+                    "description": "",
                     "default": ""
                 }
             }
@@ -367,6 +387,21 @@
                     "type": "boolean",
                     "description": "Set Kubewatch container's Security Context runAsNonRoot",
                     "default": true
+                }
+            }
+        },
+        "resources": {
+            "type": "object",
+            "properties": {
+                "limits": {
+                    "type": "object",
+                    "description": "",
+                    "default": {}
+                },
+                "requests": {
+                    "type": "object",
+                    "description": "",
+                    "default": {}
                 }
             }
         },
@@ -568,7 +603,10 @@
         "arrayModifier": {
             "type": "array",
             "description": "Test parameter for modifier array",
-            "default": "[]",
+            "default": [
+                "a",
+                "b"
+            ],
             "items": {
                 "type": "string"
             }
@@ -576,7 +614,7 @@
         "configuration": {
             "type": "string",
             "description": "haproxy configuration",
-            "default": "\"\""
+            "default": "global\n  log stdout format raw local0\n  maxconn 1024\ndefaults\n"
         },
         "jobs": {
             "type": "array",
@@ -646,6 +684,41 @@
                 }
             }
         },
+        "forceSchemaArrayModifier": {
+            "type": "array",
+            "description": "",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "w": {
+                        "type": "string",
+                        "description": ""
+                    },
+                    "y": {
+                        "type": "array",
+                        "description": "",
+                        "items": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "linkInDescription": {
+            "type": "object",
+            "properties": {
+                "propertyOne": {
+                    "type": "string",
+                    "description": "",
+                    "default": "valueOne"
+                },
+                "propertyTwo": {
+                    "type": "string",
+                    "description": "",
+                    "default": "valueTwo"
+                }
+            }
+        },
         "extraTest": {
             "type": "object",
             "properties": {
@@ -654,14 +727,6 @@
                     "description": "Content of the object",
                     "default": "whatever"
                 }
-            }
-        },
-        "forceSchemaArrayModifier": {
-            "type": "array",
-            "description": "The parameter should appear completely into the schema but with the modifier value into the README",
-            "default": "[]",
-            "items": {
-                "type": "string"
             }
         },
         "nullable": {
@@ -673,7 +738,7 @@
         "nullableNullStringWithValueChange": {
             "type": "string",
             "description": "Nullable null string. We apply string modifier that will change the type and value, but the schema will show `nullable: true`.",
-            "default": "\"\"",
+            "default": null,
             "nullable": true
         },
         "nullableNullArray": {
@@ -711,7 +776,7 @@
         "arrayEmptyModifier": {
             "type": "array",
             "description": "Test empty array modifier",
-            "default": "[]",
+            "default": "value",
             "items": {
                 "type": "string"
             }

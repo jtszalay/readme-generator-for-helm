@@ -56,7 +56,6 @@ function runReadmeGenerator(options) {
     }
 
     if (schemaFilePath) {
-      parsedMetadata.parameters = buildParamsToRenderList(parsedMetadata.parameters, config);
       renderOpenAPISchema(schemaFilePath, parsedMetadata.parameters, config);
     }
   }
